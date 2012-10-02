@@ -1,0 +1,81 @@
+/*header block style*/
+.region-header{
+	padding-top: 15px;
+}
+.region-header .block{
+	margin:  0;
+}
+#writing-events {
+	clear: both;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #FFF;
+	padding: 5px 0 0 0;
+	margin: 0;
+}
+#userGrid {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 180px;
+}
+#userDataGrid{
+	clear: both;
+	margin: 0 0 0 185px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/*get rid of the borders*/
+#userGrid table, #userDataGrid table, #userGrid tbody, #userDataGrid tbody, #userGrid tr, #userDataGrid tr, #userGrid td, #userDataGrid td{
+	border: 0;
+	margin: 0;
+	/*padding: 0;*/
+}
+#userGrid td, #userDataGrid td {
+	padding: 0;
+	margin: 0;
+}
+#userGrid td div, #userDataGrid td div{
+	height: 20px;
+	line-height: 20px;
+}
+#userGrid .dayRow, #userDataGrid .dayRow td{
+	border-bottom: 2px solid #333;
+}
+#userDataGrid .userRow td {
+ 	border-width: 0 1px;
+	border-color: #CCC;
+	border-style: solid;
+}	
+#userDataGrid .dayRow td div, #userDataGrid .userRow td div{ 
+	text-align: center;
+	width: 20px;
+}
+#userDataGrid .monthRow td{
+border-width: 0 1px;
+	border-color: #CCC;
+	border-style: solid;
+}
+#userDataGrid .monthRow td div{
+	text-align: center;
+}
+#userDataGrid td.today{
+	font-weight: bold;
+	background-color: yellow;
+}
+#userDataGrid td.current{
+	background-color: red; 
+}
+#userDataGrid td.current a {
+	font-weight: bold;
+	color: #000;
+}
+#userDataGrid .dayRow td.first{
+	border-left: 1px solid #ccc;
+}
+#userDataGrid .dayRow td:last-child{
+	border-right: 1px solid #ccc;
+}

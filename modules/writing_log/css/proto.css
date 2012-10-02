@@ -1,0 +1,141 @@
+/*header block style*/
+.region-header{
+	padding-top: 15px;
+}
+.region-header .block{
+	margin:  0;
+}
+#writing-events {
+	clear: both;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #FFF;
+	padding: 5px 0 0 0;
+	margin: 0;
+}
+#userGrid {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 180px;
+}
+#userDataGrid{
+	clear: both;
+	margin: 0 0 0 185px;
+	min-height: 0%;
+	overflow-y: visible;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/*get rid of the borders*/
+#userGrid table, #userDataGrid table, #userGrid tbody, #userDataGrid tbody, #userGrid tr, #userDataGrid tr, #userGrid td, #userDataGrid td{
+	border: 0;
+	margin: 0;
+	/*padding: 0;*/
+}
+#userGrid td, #userDataGrid td {
+	padding: 0;
+	margin: 0;
+}
+#userGrid td div, #userDataGrid td div{
+	height: 31px;
+	line-height: 31px;
+}
+#userGrid .dayRow, #userDataGrid .dayRow td{
+	border-bottom: 2px solid #333;
+}
+#userDataGrid .userRow td {
+ 	border-width: 0 1px;
+	border-color: #CCC;
+	border-style: solid;
+}	
+#userDataGrid .dayRow td div, #userDataGrid .userRow td div{ 
+	text-align: center;
+	width: 31px;
+	height: 31px;
+}
+#userDataGrid .monthRow td{
+border-width: 0 1px;
+	border-color: #CCC;
+	border-style: solid;
+}
+#userDataGrid .monthRow td div{
+	text-align: center;
+}
+#userDataGrid td.today{
+	font-weight: bold;
+	background-color: yellow;
+}
+#userDataGrid td.current{
+	background-color: red; 
+}
+#userDataGrid td.current a {
+	font-weight: bold;
+	color: #000;
+}
+#userDataGrid .dayRow td.first{
+	border-left: 1px solid #ccc;
+}
+#userDataGrid .dayRow td:last-child{
+	border-right: 1px solid #ccc;
+}
+#userDataGrid td a{
+	display: block;
+	width: 31px;
+	height: 31px;
+}
+#userDataGrid td span, .user-entry span {
+	background-image: url(images/sprites-sm.png);
+	background-repeat: no-repeat;
+	background-position: 3px 3px;
+	display: block;
+	width: 31px;
+	height: 31px;
+	text-indent: -5000px;
+}
+
+#userDataGrid td .add-new-entry span, .add-new-entry span {
+	background-position:  -37px 4px;
+}
+#userDataGrid td .add-new-entry:hover span, .add-new-entry:hover span {
+	background-position:  -77px 4px;
+}
+#userDataGrid td a.comments, #userDataGrid td a.comments:hover,#userDataGrid td a.new-comments, #userDataGrid td a.new-comments:hover{
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+	margin: 0;
+}
+#userDataGrid td .comments span, .comments span {
+	text-indent: 0;
+	background-position:  -117px 3px;
+}
+#userDataGrid td .new-comments span, .new-comments span {
+	text-indent: 0;
+	background-position:  -198px 3px;
+}
+#writing-event-legend {
+	height: 41px;
+	background-color: #fff;
+	line-height: 41px;
+	padding: 0 0 0 190px;
+	clear: both;
+	position: relative;
+}
+#writing-event-legend span{
+	background-image: url(images/sprites-sm.png);
+	background-repeat: no-repeat;
+	display: block;
+	width: 31px;
+	height: 31px;
+	margin: 5px 0 0 25px;
+	float: left;
+}
+#writing-event-legend div{
+	float: left;
+	height: 41px;
+	margin: 0;
+}

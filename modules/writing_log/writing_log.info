@@ -1,0 +1,30 @@
+; $Id$
+name = Writing Log
+description = "Manages the writing log content type"
+
+; Core version (required)
+core = 7.x
+
+; Package name (see http://drupal.org/node/542202 for a list of names)
+package = Writing Log
+
+; PHP version requirement (optional)
+; php = 5.2
+
+; Loadable code files
+files[] = writing_log.module
+; files[] = writing_log.inc
+; files[] = writing_log.class.inc
+
+; Module dependencies
+; dependencies[] = mymodule
+; dependencies[] = theirmodule (1.2)
+; dependencies[] = anothermodule (>=2.4)
+; dependencies[] = views (3.x)
+
+; Configuration page
+; configure = admin/config/homework_generator
+
+
+; For further information about configuration options, see
+; - http://drupal.org/node/542202
