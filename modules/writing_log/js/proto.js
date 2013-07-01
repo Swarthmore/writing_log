@@ -96,10 +96,11 @@ jQuery(document).ready(function(){
 			return buildHTML + "</tbody></table></div>\n";
 		};
 		this.setEvents = function(gridContainer) {
-			var commentClass, commentNum; 
+			var commentClass, commentNum, postClass; 
 			for (userId in this.users){
 				for (dateStr in this.users[userId].data){
-					jQuery('.event-' + userId + '-' + dateStr + ' div', gridContainer).html('<a href="' + this.users[userId].data[dateStr].url + '" title="' + this.users[userId].data[dateStr].title + '" class="user-entry"><span>View Entry</span></a>');
+					postClass = (this.users[userId].data[dateStr].newPost) ? 'user-entry-new' : 'user-entry';
+					jQuery('.event-' + userId + '-' + dateStr + ' div', gridContainer).html('<a href="' + this.users[userId].data[dateStr].url + '" title="' + this.users[userId].data[dateStr].title + '" class="' + postClass + '"><span>View Entry</span></a>');
 					if (parseInt(this.users[userId].data[dateStr].comments, 10) > 0){
 						if (parseInt(this.users[userId].data[dateStr].newComments, 10) > 0){
 							commentClass = 'new-comments';
@@ -177,7 +178,8 @@ jQuery(document).ready(function(){
 						'username': postUser,
 						'uid': thisNode.uid,
 						'comments': thisNode.comment_count,
-						'newComments': thisNode.new_comments
+						'newComments': thisNode.new_comments,
+						'newPost': (thisNode.timestamp == ' new') ? true : false
 					};
 				}
 			}

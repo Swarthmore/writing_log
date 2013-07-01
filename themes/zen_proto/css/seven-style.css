@@ -1241,15 +1241,19 @@ div.messages{
 
 body.page-node .node-writing-event .node-content-left, body.page-node .node-writing-event .comments {
 	float: left;
-	width: 50%;
+	width: 48%;
 }
 body.page-node .node-writing-event .comments {
 	margin: 0;
+	padding: 0 0 0 2%;
 }
 body.page-node .node-writing-event .node-content-left .submitted, body.page-node .node-writing-event .node-content-left h2 {
 	margin-top: 0;
 }
 
+.node-writing-event .field-label-above .field-label{
+	margin-top: 1em;
+}
 .view-header, .view-filters {
  	float: left;
  	margin: 0 20px 0 3px;

@@ -172,7 +172,7 @@ function writing_log_block_view($delta = '') {
       drupal_add_js(array('writing_log' => array('uid' => $user->uid)), 'setting');
       
       $output = '<div id="writing-events"><div class="grid-loading">Loading Data</div></div>';
-      $output .= '<div id="writing-event-legend"><div>Legend:</div><div class="user-entry"><span></span> = Entry</div><div class="add-new-entry"><span></span> = Add Entry</div><div class="comments"><span></span> = Comments</div><div class="new-comments"><span></span> = New (Unread) Comments</div></div>';
+      $output .= '<div id="writing-event-legend"><div>Legend:</div><div class="user-entry-new"><span></span> = New Entry</div><div class="user-entry"><span></span> = Entry</div><div class="add-new-entry"><span></span> = Add Entry</div><div class="comments"><span></span> = Comments</div><div class="new-comments"><span></span> = New (Unread) Comments</div></div>';
       $block['content'] = $output;
       break;
     case 'writing_log_new':
@@ -252,16 +252,42 @@ function writing_log_views_pre_render(&$view){
   }
 }
 
-
 /**
- * implementation of hook_node_view_alter()
- * alter the view to display the problems and their answers if available
+ * Implements hook_element_info_alter().
+ *
+ * Sets the text format processor to a custom callback function.
+ * This code is taken from the Better Formats module.
+ *
  */
-function writing_log_node_view_alter(&$build){
-	if ($build['#view_mode'] == 'full' AND $build['#node']->type == 'writing_event'){
-		//drupal_set_title($build['#node']->title . ' - ' . format_username(user_load($build['#node']->uid)));
+function writing_log_element_info_alter(&$type) {
+	if (isset($type['text_format']['#process'])) {
+		foreach ($type['text_format']['#process'] as &$callback) {
+			if ($callback === 'filter_process_format') {
+				$callback = 'writing_log_filter_process_format';
+			}
+		}
 	}
 }
+
+/**
+ * Callback for writing_log_element_info_alter().
+ * Force the use of the Template HTML filter for Problems
+ */
+function writing_log_filter_process_format($element) {
+
+	$element = filter_process_format($element);
+	// Change input format to "Template HTML"
+	if (isset($element['#bundle'])){
+		if (($element['#bundle'] == 'writing_event')  AND in_array('full_html', array_keys($element['format']['format']['#options']))) {
+			$element['format']['format']['#default_value'] = 'full_html';
+			//hide the format fieldset
+			$element['format']['#attributes']['style'] = "display:none";
+			unset ($element['format']['guidelines'], $element['format']['help'] );
+		}
+	}
+	return $element;
+}
+
 
 
 
