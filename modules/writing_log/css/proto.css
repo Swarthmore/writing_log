@@ -8,12 +8,15 @@
 #writing-events {
 	clear: both;
 	position: relative;
-	margin: 0;
-	padding: 0;
 	overflow: hidden;
 	background-color: #FFF;
 	padding: 5px 0 0 0;
 	margin: 0;
+	max-width: 960px;
+	color: #000;
+}
+#writing-events a {
+ color: #0071B3;
 }
 #userGrid {
 	position: absolute;
@@ -36,9 +39,17 @@
 	margin: 0;
 	/*padding: 0;*/
 }
+#userGrid table {
+	border-width: 0 1px 0 0;
+  border-color: #000;
+  border-style: solid;
+}
 #userGrid td, #userDataGrid td {
 	padding: 0;
 	margin: 0;
+}
+#userGrid td {
+	padding: 0 0 0 5px;
 }
 #userGrid td div, #userDataGrid td div{
 	height: 31px;
@@ -128,6 +139,7 @@ border-width: 0 1px;
 	padding: 0 0 0 190px;
 	clear: both;
 	position: relative;
+	color: #000;
 }
 #writing-event-legend span{
 	background-image: url(images/sprites-sm.png);

@@ -22,9 +22,7 @@ function writing_log_menu() {
 	);
   	return $items;
 }
-function writing_log_menu_alter(&$items) {
-	//$items['node/add/writing-event']['access callback'] = !writing_log_user_has_entry(3);
-}
+
 /**
  * Implementation of hook_user_logout
  */
@@ -79,23 +77,12 @@ function writing_log_valid_date($date){
  * render the date conflict page 
  */
 function writing_log_date_conflict_page($date){
-	drupal_add_library('system','ui.datepicker');
-	$datejs = <<<DATEJS
-	jQuery(function(){
-		jQuery("#datepicker").datepicker({
-			dateFormat: 'yy-mm-dd',
-			onSelect: function(dateText, inst) {
-				document.location.href = Drupal.settings.basePath + 'node/add/writing-event/' + dateText.replace(/\-/g, "");
-			}
-		});
-	});
-DATEJS;
-    drupal_add_js($datejs, 'inline');
-    $date = writing_log_valid_date($date);
-    if (!$nid = writing_log_user_has_entry($date)){
-    	drupal_goto('node/add/writing-event/' . $date);
-    }
-    preg_match('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', $date, $date_parts);
+	_writing_log_datepicker_js();
+	$date = writing_log_valid_date($date);
+	if (!$nid = writing_log_user_has_entry($date)){
+		drupal_goto('node/add/writing-event/' . $date);
+	}
+  preg_match('/^([0-9]{4})([0-9]{2})([0-9]{2})$/', $date, $date_parts);
 	$log_utime = mktime(0,0,0,(int)$date_parts[2],(int)$date_parts[3],(int)$date_parts[1]);
 	//2012-09-17 14:33:49;
 	$prettydate = date('F jS, Y', $log_utime);
@@ -113,6 +100,16 @@ DATECON;
  * render the date pick page 
  */
 function writing_log_date_select_page(){
+	_writing_log_datepicker_js();
+ 	$output = <<<DATECON
+ 	<h4>Select a date for your entry below.</h4>
+ 	<div id="datepicker"></div>
+DATECON;
+
+	return $output;
+}
+
+function _writing_log_datepicker_js(){
 	drupal_add_library('system','ui.datepicker');
 	$datejs = <<<DATEJS
 	jQuery(function(){
@@ -125,13 +122,6 @@ function writing_log_date_select_page(){
 	});
 DATEJS;
     drupal_add_js($datejs, 'inline');
-  
- 	$output = <<<DATECON
- 	<h4>Select a date for your entry below.</h4>
- 	<div id="datepicker"></div>
-DATECON;
-
-	return $output;
 }
 
 /**
@@ -164,11 +154,10 @@ function writing_log_block_view($delta = '') {
       // function.
       writing_log_load_js_data();
       $mod_path = drupal_get_path('module', 'writing_log');
-	  $js_path = $mod_path . "/js";
-	  $css_path = $mod_path . "/css";
-      drupal_add_js($js_path . '/proto.js');
-	  drupal_add_css($css_path . '/proto.css');
-      
+	  	$js_path = $mod_path . "/js";
+	  	$css_path = $mod_path . "/css";
+    	drupal_add_js($js_path . '/proto.js');
+	  	drupal_add_css($css_path . '/proto.css');
       drupal_add_js(array('writing_log' => array('uid' => $user->uid)), 'setting');
       
       $output = '<div id="writing-events"><div class="grid-loading">Loading Data</div></div>';
@@ -192,6 +181,7 @@ function writing_log_load_js_data(){
 	$user_content = _writing_log_get_view_json_data("user_data_feed", "Page");
 	drupal_add_js ("var gridEntryData = " . $entry_content . ";\nvar gridUserData = " . $user_content . ";", array('type' => 'inline', 'scope' => 'header'));
 }
+
 /* helper function for load_js_data */
 function _writing_log_get_view_json_data($view_name, $display_id){
 	$data_view = views_get_view($view_name);
@@ -286,6 +276,26 @@ function writing_log_filter_process_format($element) {
 		}
 	}
 	return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function writing_log_theme($existing, $type, $theme, $path) {
+  $theme = array();
+  $theme['html__json_data_feed'] = array(
+    'render element' => 'content',
+    'base hook' => 'html',
+    'template' => 'html--json-data-feed',
+    'path' => drupal_get_path('module', 'writing_log'),
+  );
+  $theme['page__json_data_feed'] = array(
+    'render element' => 'content',
+    'base hook' => 'page',
+    'template' => 'page--json-data-feed',
+    'path' => drupal_get_path('module', 'writing_log'),
+  );
+  return $theme;
 }
 
 
